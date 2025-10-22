@@ -8,7 +8,8 @@
         <ul class="list-group">
           {% for a in appointments %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              Patient ID: {{ a.patient_id }} — {{ a.date }} {{ a.time }}
+              <!-- Display patient info using the relationship -->
+              Patient: {{ a.patient.name }} ({{ a.patient.email }}) — {{ a.date }} {{ a.time }}
               <div>
                 {% if a.status == 'pending' %}
                   <a href="{{ url_for('confirm', appt_id=a.id) }}" class="btn btn-sm btn-success">Confirm</a>

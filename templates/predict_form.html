@@ -1,68 +1,61 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="card mx-auto" style="max-width:760px">
-    <div class="card-body">
-      <h4 class="card-title">Enter health data</h4>
-      <form method="post">
-        <div class="row g-2">
-          <div class="col-md-3">
-            <label class="form-label">Age</label>
-            <input class="form-control" name="age" required>
-          </div>
-          <div class="col-md-3">
-            <label class="form-label">Sex (1=male,0=female)</label>
-            <input class="form-control" name="sex" required>
-          </div>
-          <div class="col-md-3">
-            <label class="form-label">Resting BP</label>
-            <input class="form-control" name="trestbps" required>
-          </div>
-          <div class="col-md-3">
-            <label class="form-label">Cholesterol</label>
-            <input class="form-control" name="chol" required>
-          </div>
+<div class="card mx-auto" style="max-width:760px">
+  <div class="card-body">
+    <h4 class="card-title">Enter Health Data</h4>
+    <form method="post">
+      <div class="row g-2">
 
-          <div class="col-md-4">
-            <label class="form-label">Fasting BS (1=true,0=false)</label>
-            <input class="form-control" name="fbs" required>
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">Resting ECG (0/1/2)</label>
-            <input class="form-control" name="restecg" required>
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">Max Heart Rate</label>
-            <input class="form-control" name="thalach" required>
-          </div>
-
-          <div class="col-md-4">
-            <label class="form-label">Exercise angina (1=yes,0=no)</label>
-            <input class="form-control" name="exang" required>
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">Oldpeak</label>
-            <input class="form-control" name="oldpeak" required>
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">Slope (0/1/2)</label>
-            <input class="form-control" name="slope" required>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">CA (number of major vessels 0-3)</label>
-            <input class="form-control" name="ca" required>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Thal (1=normal,2=fixed,3=reversible)</label>
-            <input class="form-control" name="thal" required>
-          </div>
-
+        <!-- Age and Gender -->
+        <div class="col-md-6">
+          <label class="form-label">Age</label>
+          <input class="form-control" type="number" name="Age" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Gender</label>
+          <select class="form-select" name="Gender" required>
+            <option value="">Select...</option>
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+          </select>
         </div>
 
-        <div class="mt-3">
-          <button class="btn btn-primary">Get Prediction</button>
+        <!-- Binary questions -->
+        {% set questions = {
+          "Chest_Pain":"Have you ever experienced chest pain?",
+          "Shortness_of_Breath":"Have you ever experienced shortness of breath?",
+          "Fatigue":"Have you ever experienced fatigue?",
+          "Palpitations":"Have you ever experienced palpitations?",
+          "Dizziness":"Have you ever experienced dizziness?",
+          "Swelling":"Have you experienced swelling in hands/feet?",
+          "Pain_Arms_Jaw_Back":"Have you experienced pain in arms, jaw, or back?",
+          "Cold_Sweats_Nausea":"Have you experienced cold sweats or nausea?",
+          "High_BP":"Do you have high blood pressure?",
+          "High_Cholesterol":"Do you have high cholesterol?",
+          "Diabetes":"Do you have diabetes?",
+          "Smoking":"Do you smoke?",
+          "Obesity":"Do you consider yourself obese?",
+          "Sedentary_Lifestyle":"Do you lead a sedentary lifestyle?",
+          "Family_History":"Do you have a family history of heart disease?",
+          "Chronic_Stress":"Do you experience chronic stress?"
+        } %}
+        {% for col, q in questions.items() %}
+        <div class="col-md-6">
+          <label class="form-label">{{ q }}</label>
+          <select class="form-select" name="{{ col }}" required>
+            <option value="">Select...</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
         </div>
-      </form>
-    </div>
+        {% endfor %}
+
+      </div>
+
+      <div class="mt-3">
+        <button class="btn btn-primary w-100">Get Prediction</button>
+      </div>
+    </form>
   </div>
+</div>
 {% endblock %}

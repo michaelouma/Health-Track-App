@@ -91,29 +91,43 @@ def logout():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    user_id = current_user.id  # safer than session['user_id']
+    user_id = current_user.id
 
-    # Fetch health records for this user
-    health_records = HealthRecord.query.filter_by(user_id=user_id).all()
-    
-    # Count low vs high risk
-    low_risk = sum(1 for h in health_records if h.prediction < 0.5)
-    high_risk = sum(1 for h in health_records if h.prediction >= 0.5)
+    if current_user.role == "doctor":
+        # Doctor dashboard
+        appointments = Appointment.query.filter_by(doctor_id=user_id).all()
+        patient_records = []
 
-    # Fetch appointments where this user is the patient
-    appointments = Appointment.query.filter_by(patient_id=user_id).all()
+        for a in appointments:
+            # Latest prediction for this patient
+            record = HealthRecord.query.filter_by(user_id=a.patient_id).order_by(HealthRecord.created_at.desc()).first()
+            patient_records.append({
+                "patient_name": a.patient.name if a.patient else "Unknown",
+                "appointment_date": a.date,
+                "appointment_time": a.time,
+                "risk": record.prediction if record else None,
+                "status": a.status
+            })
 
-    # If you want doctors, get all users with role='doctor'
-    doctors = User.query.filter_by(role='doctor').all()
+        return render_template("dashboard_doctor.html", patient_records=patient_records)
 
-    return render_template(
-        'dashboard.html',
-        health_records=health_records,
-        appointments=appointments,
-        doctors=doctors,
-        low_risk_count=low_risk,
-        high_risk_count=high_risk
-    )
+    else:
+        # Patient dashboard
+        health_records = HealthRecord.query.filter_by(user_id=user_id).all()
+        low_risk = sum(1 for h in health_records if h.prediction < 0.5)
+        high_risk = sum(1 for h in health_records if h.prediction >= 0.5)
+        appointments = Appointment.query.filter_by(patient_id=user_id).all()
+        doctors = User.query.filter_by(role='doctor').all()
+
+        return render_template(
+            'dashboard.html',
+            health_records=health_records,
+            appointments=appointments,
+            doctors=doctors,
+            low_risk_count=low_risk,
+            high_risk_count=high_risk
+        )
+
 
 # Prediction form
 @app.route("/predict", methods=["GET","POST"])
@@ -140,7 +154,7 @@ def predict():
         df = df[columns]
         prob = float(model.predict_proba(df)[:,1][0])
         # save health data
-        hd = HealthData(user_id=current_user.id, data_json=json.dumps(form), prediction=prob)
+        hd = HealthRecord(user_id=current_user.id, data_json=json.dumps(form), prediction=prob)
         db.session.add(hd)
         db.session.commit()
         threshold = 0.5

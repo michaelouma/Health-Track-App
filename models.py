@@ -31,3 +31,7 @@ class Appointment(db.Model):
     time = db.Column(db.String(20))
     status = db.Column(db.String(20), default="pending")  # pending, confirmed, completed
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # ✅ Add these relationships
+    patient = db.relationship("User", foreign_keys=[patient_id])
+    doctor = db.relationship("User", foreign_keys=[doctor_id])
