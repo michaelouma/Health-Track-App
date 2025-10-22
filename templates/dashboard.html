@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card mb-3">
+        <div class="card-body">
+  <h5 class="card-title">Health Check</h5>
+  <p>Answer the questions below to get your heart risk status.</p>
+
+  <form method="POST" action="{{ url_for('predict') }}">
+    <!-- Chest Pain -->
+    <div class="mb-2">
+      <label class="form-label">Have you ever experienced chest pain?</label>
+      <select class="form-select" name="Chest_Pain" required>
+        <option value="">Select</option>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+    </div>
+
+    <!-- Shortness of Breath -->
+    <div class="mb-2">
+      <label class="form-label">Do you experience shortness of breath?</label>
+      <select class="form-select" name="Shortness_of_Breath" required>
+        <option value="">Select</option>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+    </div>
+
+    <!-- Fatigue -->
+    <div class="mb-2">
+      <label class="form-label">Do you feel fatigued often?</label>
+      <select class="form-select" name="Fatigue" required>
+        <option value="">Select</option>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+    </div>
+
+    <!-- Gender -->
+    <div class="mb-2">
+      <label class="form-label">Gender</label>
+      <select class="form-select" name="Gender" required>
+        <option value="">Select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+
+    <!-- Age -->
+    <div class="mb-2">
+      <label class="form-label">Age</label>
+      <input type="number" class="form-control" name="Age" min="1" required>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary w-100">Get Prediction</button>
+  </form>
+</div>
+
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Your Recent Predictions</h5>
+          {% if health_records %}
+            <ul class="list-group">
+              {% for h in health_records %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ h.created_at.strftime('%Y-%m-%d %H:%M') }}
+                  <span class="badge {{ 'bg-danger' if h.prediction>=0.5 else 'bg-success' }}">
+                    {{ '%.3f'|format(h.prediction) }}
+                  </span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No records yet.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- ✅ New Chart Card -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Prediction Overview</h5>
+          <canvas id="healthChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <!-- Your existing Book a Doctor and Appointment cards -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Book a Doctor</h5>
+          <p>If your risk is high, choose a doctor and request an appointment.</p>
+          <form method="post" action="{{ url_for('book') }}">
+            <div class="mb-2">
+              <label class="form-label">Select Doctor</label>
+              <select class="form-select" name="doctor_id" required>
+                <option value="">Choose...</option>
+                {% for d in doctors %}
+                  <option value="{{ d.id }}">{{ d.name }} — {{ d.email }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Date</label>
+              <input class="form-control" type="date" name="date" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Time</label>
+              <input class="form-control" type="time" name="time" required>
+            </div>
+            <button class="btn btn-success w-100">Request Appointment</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Your Appointments</h5>
+          {% if appointments %}
+            <ul class="list-group">
+              {% for a in appointments %}
+                <li class="list-group-item">
+                  {{ a.date }} {{ a.time }} — <strong>{{ a.status }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No appointments.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Chart Script -->
+  <script>
+    const ctx = document.getElementById('healthChart').getContext('2d');
+    const healthChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Low Risk', 'High Risk'],
+        datasets: [{
+          label: 'Heart Risk',
+          data: [{{ low_risk_count }}, {{ high_risk_count }}], // values from Flask
+          backgroundColor: ['#36A2EB', '#FF6384'],
+          hoverOffset: 6
+        }]
+      },
+    });
+  </script>
+{% endblock %}

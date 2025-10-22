@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="jumbotron p-5 rounded bg-white shadow-sm">
+    <h1 class="display-6">HealthTrack+</h1>
+    <p class="lead">Early detection and easy booking — monitor non-communicable disease risks and consult doctors quickly.</p>
+    <hr>
+    <p>Register as a patient to start. If you're a clinician, register as a doctor.</p>
+    <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started</a>
+  </div>
+{% endblock %}

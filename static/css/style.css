@@ -1,0 +1,26 @@
+/* style.css - health sector palette: calming blue + green accents */
+.header-health {
+  background: linear-gradient(90deg, #0d6efd 0%, #20c997 100%);
+  box-shadow: 0 2px 6px rgba(13,110,253,0.12);
+}
+.brand-icon {
+  margin-right:6px;
+  font-size:18px;
+}
+body {
+  font-family: "Segoe UI", Roboto, -apple-system, "Helvetica Neue", Arial;
+}
+.card {
+  border-radius: 12px;
+}
+.container main {
+  max-width: 1100px;
+}
+.alert a {
+  color: inherit;
+  font-weight: 600;
+}
+footer {
+  background: #f8f9fa;
+  margin-top: 40px;
+}

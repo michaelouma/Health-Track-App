@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card mx-auto" style="max-width:720px">
+    <div class="card-body">
+      <h4>Risk Result</h4>
+      <p>Your risk score: <strong>{{ '%.3f'|format(prob) }}</strong></p>
+      {% if prob >= threshold %}
+        <div class="alert alert-danger">High risk detected. Please book a consultation with a doctor.</div>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-success">Book Doctor</a>
+      {% else %}
+        <div class="alert alert-success">Low-moderate risk. Maintain healthy lifestyle and re-check periodically.</div>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-primary">Back to Dashboard</a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
