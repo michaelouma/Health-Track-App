@@ -9,10 +9,21 @@
 }
 body {
   font-family: "Segoe UI", Roboto, -apple-system, "Helvetica Neue", Arial;
+
+  /* --- ADD THESE LINES --- */
+  background-image: url(../image/heart.jpg); /* REPLACE with your file path */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  /* ----------------------- */
 }
 .card {
   border-radius: 12px;
+  background-color: rgba(0, 0, 50, 0.6); /* Dark blue with 60% opacity */
+  color: white; /* You'll likely need to change text color to white for readability */
 }
+
 .container main {
   max-width: 1100px;
 }
@@ -20,7 +31,61 @@ body {
   color: inherit;
   font-weight: 600;
 }
+.jumbotron {
+  /* Use a linear gradient blending from LIGHT BLUE to LIGHT RED/PINK */
+  background-image: linear-gradient(
+    90deg, 
+    rgba(13, 220, 253, 0.8) 0%,   /* Light Blue/Cyan starting at the left */
+    rgba(255, 192, 203, 0.6) 100% /* Light Pink/Rose ending at the right */
+  ) !important; 
+  
+  /* Text remains dark for readability */
+  color: #333; 
+}
+* Make the main title BOLDER */
+.jumbotron h1 {
+  font-weight: 700; /* Use a strong bold weight */
+}
+
+/* Make all text in the jumbotron a bit bolder and highly readable */
+.jumbotron p, .jumbotron a {
+  font-weight: 500; /* Medium bold */
+  /* Ensure a very dark color for contrast */
+  color: #1a1a1a; 
+}
+
+/* Update the footer rule */
 footer {
-  background: #f8f9fa;
+  /* Apply the same gradient to the footer for consistency */
+  background-image: linear-gradient(
+    90deg, 
+    rgba(13, 220, 253, 0.8) 0%, 
+    rgba(255, 192, 203, 0.6) 100%
+  );
   margin-top: 40px;
+  /* Text remains dark for readability */
+  color: #333; 
+}
+/* ADD THIS NEW BLOCK to target the content area inside the card */
+.card-body {
+  /* Set background to transparent or use the same semi-transparent color */
+  background-color: transparent !important; 
+  
+  /* If you want the inner section to be the same color as the outer .card, use this instead: */
+  /* background-color: rgba(0, 0, 50, 0.6); */
+}
+
+/* Make HealthTrack+ bold and gray in the navbar */
+/* Update the Navbar Brand to increase size and match the light blue color */
+.navbar-brand {
+  font-weight: bold; 
+  /* Set the color to the same light blue as your description text */
+  color: #a0f0ff !important; 
+  /* Increase the font size */
+  font-size: 1.3rem; /* Adjust this value (e.g., 1.4rem, 1.5rem) to your liking */
+}
+/* Make HealthTrack+ bold and gray in the main content box */
+.jumbotron h1 {
+  font-weight: 700; /* Use a strong bold weight */
+  color: white !important; /* Change title color to gray */
 }
