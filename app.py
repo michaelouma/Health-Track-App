@@ -95,24 +95,19 @@ def dashboard():
 
     if current_user.role == "doctor":
         # Doctor dashboard
+        
+        # 1. Appointments are fetched correctly here:
         appointments = Appointment.query.filter_by(doctor_id=user_id).all()
-        patient_records = []
-
-        for a in appointments:
-            # Latest prediction for this patient
-            record = HealthRecord.query.filter_by(user_id=a.patient_id).order_by(HealthRecord.created_at.desc()).first()
-            patient_records.append({
-                "patient_name": a.patient.name if a.patient else "Unknown",
-                "appointment_date": a.date,
-                "appointment_time": a.time,
-                "risk": record.prediction if record else None,
-                "status": a.status
-            })
-
-        return render_template("dashboard_doctor.html", patient_records=patient_records)
+        
+        # 2. You can keep this loop if you want to use the patient_records 
+        #    list later for something, but it's not needed for the core fix.
+        #    However, to make the template work, we only need 'appointments'.
+        
+        # 3. CRUCIAL FIX: Pass the 'appointments' list to the template!
+        return render_template("dashboard_doctor.html", appointments=appointments) 
 
     else:
-        # Patient dashboard
+        # Patient dashboard (This section is already correct)
         health_records = HealthRecord.query.filter_by(user_id=user_id).all()
         low_risk = sum(1 for h in health_records if h.prediction < 0.5)
         high_risk = sum(1 for h in health_records if h.prediction >= 0.5)
@@ -127,7 +122,6 @@ def dashboard():
             low_risk_count=low_risk,
             high_risk_count=high_risk
         )
-
 
 # Prediction form
 @app.route("/predict", methods=["GET","POST"])
@@ -167,21 +161,42 @@ def predict():
 @app.route("/book", methods=["POST"])
 @login_required
 def book():
+    # Ensure only patients can book
     if current_user.role != "patient":
         flash("Only patients can book appointments.", "warning")
         return redirect(url_for("dashboard"))
-    doctor_id = int(request.form.get("doctor_id"))
+
+    # Extract form data
+    doctor_id = request.form.get("doctor_id")
     date_str = request.form.get("date")
     time_str = request.form.get("time")
+
+    # Validate input
     if not (doctor_id and date_str and time_str):
-        flash("Please select doctor, date and time.", "warning")
+        flash("Please select doctor, date, and time.", "warning")
         return redirect(url_for("dashboard"))
-    date_obj = datetime.fromisoformat(date_str).date()
-    appt = Appointment(patient_id=current_user.id, doctor_id=doctor_id, date=date_obj, time=time_str, status="pending")
-    db.session.add(appt)
+
+    try:
+        doctor_id = int(doctor_id)
+        date_obj = datetime.fromisoformat(date_str).date()
+    except ValueError:
+        flash("Invalid date or doctor selection.", "danger")
+        return redirect(url_for("dashboard"))
+
+    # Create and save appointment
+    appointment = Appointment(
+        patient_id=current_user.id,
+        doctor_id=doctor_id,
+        date=date_obj,
+        time=time_str,
+        status="pending"
+    )
+    db.session.add(appointment)
     db.session.commit()
-    flash("Appointment requested. Awaiting confirmation.", "success")
+
+    flash("Appointment requested successfully. Awaiting confirmation from doctor.", "success")
     return redirect(url_for("dashboard"))
+
 
 # Doctor confirms
 @app.route("/appointments/<int:appt_id>/confirm")

@@ -1,287 +1,297 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="row">
-    <div class="col-md-7">
-      <div class="card mb-3">
-        <div class="card-body">
-  <h5 class="card-title">Health Check</h5>
-  <p>Answer the questions below to get your heart risk status.</p>
+<div class="row">
+  <!-- LEFT SIDE -->
+  <div class="col-md-7">
+    <!-- Health Check Card -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Health Check</h5>
+        <p>Answer the questions below to get your heart risk status.</p>
 
-  <form method="POST" action="{{ url_for('predict') }}">
-    <!-- Chest Pain -->
-    <div class="mb-2">
-      <label class="form-label">Have you ever experienced chest pain?</label>
-      <select class="form-select" name="Chest_Pain" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+        <form method="POST" action="{{ url_for('predict') }}">
+          <!-- Chest Pain -->
+          <div class="mb-2">
+            <label class="form-label">Have you ever experienced chest pain?</label>
+            <select class="form-select" name="Chest_Pain" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!-- Shortness of Breath -->
-    <div class="mb-2">
-      <label class="form-label">Do you experience shortness of breath?</label>
-      <select class="form-select" name="Shortness_of_Breath" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Shortness of Breath -->
+          <div class="mb-2">
+            <label class="form-label">Do you experience shortness of breath?</label>
+            <select class="form-select" name="Shortness_of_Breath" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!-- Fatigue -->
-    <div class="mb-2">
-      <label class="form-label">Do you feel fatigued often?</label>
-      <select class="form-select" name="Fatigue" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Fatigue -->
+          <div class="mb-2">
+            <label class="form-label">Do you feel fatigued often?</label>
+            <select class="form-select" name="Fatigue" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!-- Gender -->
-    <div class="mb-2">
-      <label class="form-label">Gender</label>
-      <select class="form-select" name="Gender" required>
-        <option value="">Select</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-    </div>
+          <!-- Gender -->
+          <div class="mb-2">
+            <label class="form-label">Gender</label>
+            <select class="form-select" name="Gender" required>
+              <option value="">Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
 
-    <!-- Age -->
-    <div class="mb-2">
-      <label class="form-label">Age</label>
-      <input type="number" class="form-control" name="Age" min="1" required>
-    </div>
+          <!-- Age -->
+          <div class="mb-2">
+            <label class="form-label">Age</label>
+            <input type="number" class="form-control" name="Age" min="1" required>
+          </div>
 
-    <!--Palpitation-->
-    <div class="mb-2">
-      <label class="form-label">Do you ever felt heart palpitation</label>
-      <select class="form-select" name="Palpitation" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Palpitation -->
+          <div class="mb-2">
+            <label class="form-label">Do you ever feel heart palpitations?</label>
+            <select class="form-select" name="Palpitation" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--Dizziness-->
-    <div class="mb-2">
-      <label class="form-label">Do you experience dizziness or lightheadedness</label>
-      <select class="form-select" name="Dizziness" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Dizziness -->
+          <div class="mb-2">
+            <label class="form-label">Do you experience dizziness or lightheadedness?</label>
+            <select class="form-select" name="Dizziness" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--Swellingness-->
-    <div class="mb-2">
-      <label class="form-label">Have you noticed swelling in your legs, feets or hands</label>
-      <select class="form-select" name="swelling" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Swelling -->
+          <div class="mb-2">
+            <label class="form-label">Have you noticed swelling in your legs, feet, or hands?</label>
+            <select class="form-select" name="swelling" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--Pain_Arms_Jaw_Back-->
-    <div class="mb-2">
-      <label class="form-label">Do you feel pain in your arms, jaws and back</label>
-      <select class="form-select" name="Pain_Armns_Jaw_Back" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Pain in Arms/Jaw/Back -->
+          <div class="mb-2">
+            <label class="form-label">Do you feel pain in your arms, jaw, or back?</label>
+            <select class="form-select" name="Pain_Arms_Jaw_Back" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--Cold_Sweats_Nausea-->
-    <div class="mb-2">
-      <label class="form-label">Have you experienced cold sweats or Nausea</label>
-      <select class="form-select" name="Cold_Sweats_Nausea" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Cold Sweats / Nausea -->
+          <div class="mb-2">
+            <label class="form-label">Have you experienced cold sweats or nausea?</label>
+            <select class="form-select" name="Cold_Sweats_Nausea" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--High_BP-->
-    <div class="mb-2">
-      <label class="form-label">Have you ever been diagnosed with High Blood Pressure?</label>
-      <select class="form-select" name="High_BP" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- High BP -->
+          <div class="mb-2">
+            <label class="form-label">Have you ever been diagnosed with high blood pressure?</label>
+            <select class="form-select" name="High_BP" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--High_Cholesterol-->
-    <div class="mb-2">
-      <label class="form-label">Have you ever been diagnosed with high Cholesterol</label>
-      <select class="form-select" name="High_Cholesterol" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- High Cholesterol -->
+          <div class="mb-2">
+            <label class="form-label">Have you ever been diagnosed with high cholesterol?</label>
+            <select class="form-select" name="High_Cholesterol" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--Diabetes-->
-    <div class="mb-2">
-      <label class="form-label">Have you ever been diagnosed with Diabetes</label>
-      <select class="form-select" name="Diabetes" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Diabetes -->
+          <div class="mb-2">
+            <label class="form-label">Have you ever been diagnosed with diabetes?</label>
+            <select class="form-select" name="Diabetes" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--Smoking-->
-    <div class="mb-2">
-      <label class="form-label">Do you smoke or have smoked before</label>
-      <select class="form-select" name="Smoking" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Smoking -->
+          <div class="mb-2">
+            <label class="form-label">Do you smoke or have you smoked before?</label>
+            <select class="form-select" name="Smoking" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--Obesity-->
-    <div class="mb-2">
-      <label class="form-label">Are you currently overweight or obese?label>
-      <select class="form-select" name="Obesity" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Obesity -->
+          <div class="mb-2">
+            <label class="form-label">Are you currently overweight or obese?</label>
+            <select class="form-select" name="Obesity" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--Sedentary_Lifestyle-->
-    <div class="mb-2">
-      <label class="form-label">Do you lead a mostly sedentary lifestyle?</label>
-      <select class="form-select" name="Sedentary_Lifestyle" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Sedentary Lifestyle -->
+          <div class="mb-2">
+            <label class="form-label">Do you lead a mostly sedentary lifestyle?</label>
+            <select class="form-select" name="Sedentary_Lifestyle" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--Family_History-->
-    <div class="mb-2">
-      <label class="form-label">Do you have family history of Heart disease</label>
-      <select class="form-select" name="Family_History" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Family History -->
+          <div class="mb-2">
+            <label class="form-label">Do you have a family history of heart disease?</label>
+            <select class="form-select" name="Family_History" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!--Chronic_Stress-->
-    <div class="mb-2">
-      <label class="form-label">Do you experience chronic stress regularly</label>
-      <select class="form-select" name="Chronic_Stress" required>
-        <option value="">Select</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-    </div>
+          <!-- Chronic Stress -->
+          <div class="mb-2">
+            <label class="form-label">Do you experience chronic stress regularly?</label>
+            <select class="form-select" name="Chronic_Stress" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary w-100">Get Prediction</button>
-  </form>
-</div>
-
-      </div>
-
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Your Recent Predictions</h5>
-          {% if health_records %}
-            <ul class="list-group">
-              {% for h in health_records %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  {{ h.created_at.strftime('%Y-%m-%d %H:%M') }}
-                  <span class="badge {{ 'bg-danger' if h.prediction>=0.5 else 'bg-success' }}">
-                    {{ '%.3f'|format(h.prediction) }}
-                  </span>
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p class="text-muted">No records yet.</p>
-          {% endif %}
-        </div>
-      </div>
-
-      <!-- ✅ New Chart Card -->
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Prediction Overview</h5>
-          <canvas id="healthChart"></canvas>
-        </div>
+          <button type="submit" class="btn btn-primary w-100">Get Prediction</button>
+        </form>
       </div>
     </div>
 
-    <div class="col-md-5">
-      <!-- Your existing Book a Doctor and Appointment cards -->
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Book a Doctor</h5>
-          <p>If your risk is high, choose a doctor and request an appointment.</p>
-          <form method="post" action="{{ url_for('book') }}">
-            <div class="mb-2">
-              <label class="form-label">Select Doctor</label>
-              <select class="form-select" name="doctor_id" required>
-                <option value="">Choose...</option>
-                {% for d in doctors %}
-                  <option value="{{ d.id }}">{{ d.name }} — {{ d.email }}</option>
-                {% endfor %}
-              </select>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Date</label>
-              <input class="form-control" type="date" name="date" required>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Time</label>
-              <input class="form-control" type="time" name="time" required>
-            </div>
-            <button class="btn btn-success w-100">Request Appointment</button>
-          </form>
-        </div>
+    <!-- Recent Predictions -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Your Recent Predictions</h5>
+        {% if health_records %}
+          <ul class="list-group">
+            {% for h in health_records %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ h.created_at.strftime('%Y-%m-%d %H:%M') }}
+                <span class="badge {{ 'bg-danger' if h.prediction>=0.5 else 'bg-success' }}">
+                  {{ '%.3f'|format(h.prediction) }}
+                </span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">No records yet.</p>
+        {% endif %}
       </div>
+    </div>
 
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Your Appointments</h5>
-          {% if appointments %}
-            <ul class="list-group">
-              {% for a in appointments %}
-                <li class="list-group-item">
-                  {{ a.date }} {{ a.time }} — <strong>{{ a.status }}</strong>
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p class="text-muted">No appointments.</p>
-          {% endif %}
-        </div>
+    <!-- Chart -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Prediction Overview</h5>
+        <canvas id="healthChart"></canvas>
       </div>
     </div>
   </div>
 
-  <!-- ✅ Chart Script -->
-  <script>
-    const ctx = document.getElementById('healthChart').getContext('2d');
-    const healthChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Low Risk', 'High Risk'],
-        datasets: [{
-          label: 'Heart Risk',
-          data: [{{ low_risk_count }}, {{ high_risk_count }}], // values from Flask
-          backgroundColor: ['#36A2EB', '#FF6384'],
-          hoverOffset: 6
-        }]
-      },
-    });
-  </script>
+  <!-- RIGHT SIDE -->
+  <div class="col-md-5">
+    <!-- Book a Doctor -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Book a Doctor</h5>
+        <p>If your risk is high, choose a doctor and request an appointment.</p>
+
+        <form method="POST" action="{{ url_for('book') }}">
+          <div class="mb-2">
+            <label class="form-label">Select Doctor</label>
+            <select class="form-select" name="doctor_id" required>
+              <option value="">Choose a doctor...</option>
+              {% for d in doctors %}
+                <option value="{{ d.id }}">{{ d.name }} — {{ d.email }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" name="date" required>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Time</label>
+            <input type="time" class="form-control" name="time" required>
+          </div>
+
+          <button type="submit" class="btn btn-success w-100">Request Appointment</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Appointments -->
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Your Appointments</h5>
+        {% if appointments %}
+          <ul class="list-group">
+            {% for a in appointments %}
+              <li class="list-group-item">
+                <strong>Doctor:</strong> {{ a.doctor.name if a.doctor else "Unknown" }}<br>
+                <strong>Date:</strong> {{ a.date }} {{ a.time }}<br>
+                <strong>Status:</strong> <span class="text-capitalize">{{ a.status }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">No appointments yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chart Script -->
+<script>
+  const ctx = document.getElementById('healthChart').getContext('2d');
+  const healthChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Low Risk', 'High Risk'],
+      datasets: [{
+        label: 'Heart Risk',
+        data: [{{ low_risk_count }}, {{ high_risk_count }}],
+        backgroundColor: ['#36A2EB', '#FF6384'],
+        hoverOffset: 6
+      }]
+    }
+  });
+</script>
 {% endblock %}
+
