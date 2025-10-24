@@ -89,3 +89,110 @@ footer {
   font-weight: 700; /* Use a strong bold weight */
   color: white !important; /* Change title color to gray */
 }
+.risk-spotlight-section {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    
+    padding: 60px 20px; 
+    min-height: 350px; 
+    
+    max-width: 1400px; 
+    margin: 40px auto; 
+    border-radius: 10px;
+    
+    /* *** RECTIFICATION: SOFTER GRADIENT (Blue -> Sky Blue -> Muted Red -> Dark Blue) *** */
+    background-image: linear-gradient(
+        135deg, /* Diagonal angle */
+        
+        /* 1. Deep Blue Base (Start - Far Left) */
+        rgba(10, 25, 70, 0.9), 
+        
+        /* 2. Sky Blue Accent (Smoother transition) */
+        rgba(0, 180, 255, 0.6) 30%, 
+        
+        /* 3. Muted Red/Magenta (Midpoint - Lowered opacity to 0.4) */
+        rgba(255, 50, 100, 0.4) 60%, 
+        
+        /* 4. Deep Blue (End - Far Right) */
+        rgba(10, 25, 70, 0.9) 100% 
+    );
+    
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Image Container (.spotlight-image-box) --- */
+.spotlight-image-box {
+    /* **RECTIFICATION**: Giving the image container 50% of the flexible space */
+    flex: 0 0 50%; 
+    display: flex;
+    justify-content: flex-start; 
+    padding-right: 40px; 
+    
+    /* **RECTIFICATION**: Aggressively increased maximum width and height */
+    max-height: 500px; 
+    max-width: 700px; /* Allowing for a very large image container */
+}
+
+/* --- Image Element (.spotlight-image) --- */
+.spotlight-image {
+    /* **This is the key:** The image will now scale up to fill the much larger max-width of its container. */
+    max-width: 100%;
+    height: 100%; 
+    object-fit: contain; 
+    border-radius: 8px;
+    filter: brightness(1.1) saturate(1.1);
+}
+
+/* --- Text Container (.spotlight-text-box) --- */
+.spotlight-text-box {
+    flex: 1; /* Takes up the rest of the space */
+    max-width: 50%; /* Ensuring the text doesn't stretch too far */
+    color: #fff;
+    padding-left: 0; 
+}
+
+.spotlight-text-box h3 {
+    font-size: 2.2em; 
+    color: #00bcd4;
+    margin-bottom: 15px;
+}
+
+.spotlight-text-box p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* ... (Mobile Responsiveness remains the same) ... */
+
+/* Styling for the Header and Logo */
+
+.header {
+    /* Assuming your header uses flexbox to align the logo and links */
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    padding: 15px 30px; /* Adjust padding as needed */
+    /* ... other header styles (background-color, etc.) ... */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center; /* Important for vertical alignment with text */
+}
+
+.brand-logo {
+    /* Set a small, clear height for the logo */
+    height: 60px; 
+    width: auto; 
+    /* Add space between the logo and the title text */
+    margin-right: 10px; 
+    /* Ensure the logo color works with your dark header background */
+    filter: drop-shadow(0 0 2px rgba(0, 180, 255, 0.5)); 
+}
+
+/* Optional: Adjust the title to be slightly larger or clearer */
+.brand-title {
+    font-size: 1.5em; 
+    color: white;
+}

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+
   <div class="jumbotron p-5 rounded shadow-sm">
     <h1 class="display-6">HealthTrack+</h1>
     <p class="lead">Early detection and easy booking — monitor non-communicable disease risks and consult doctors quickly.</p>
@@ -7,4 +8,14 @@
     <p>Register as a patient to start. If you're a clinician, register as a doctor.</p>
     <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started</a>
   </div>
+  <div class="risk-spotlight-section">
+    <div class="spotlight-image-box">
+        <img src="../static/image/Yhealth.jpeg" alt="Health Check Up" class="spotlight-image" height="400" width="300">
+    </div>
+    
+    <div class="spotlight-text-box">
+        <h3>See Your Health Future, Today.</h3>
+        <p>Unlock your <strong>personalized Health Risk Index</strong> in under 5 minutes. Our simple quiz and lab data analysis provide an accurate, early look at your potential risk for conditions like <strong>Diabetes and Heart Disease</strong>, so you can act before it’s too late.</p>
+    </div>
+</div>
 {% endblock %}
