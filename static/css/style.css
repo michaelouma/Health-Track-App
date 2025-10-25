@@ -10,18 +10,18 @@
 body {
   font-family: "Segoe UI", Roboto, -apple-system, "Helvetica Neue", Arial;
 
-  /* --- ADD THESE LINES --- */
-  background-image: url(../image/heart.jpg); /* REPLACE with your file path */
+  
+  background-image: url(../image/heart.jpg); 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  /* ----------------------- */
+  
 }
 .card {
   border-radius: 12px;
   background-color: rgba(0, 0, 50, 0.6); /* Dark blue with 60% opacity */
-  color: white; /* You'll likely need to change text color to white for readability */
+  color: white; 
 }
 
 .container main {
@@ -32,7 +32,7 @@ body {
   font-weight: 600;
 }
 .jumbotron {
-  /* Use a linear gradient blending from LIGHT BLUE to LIGHT RED/PINK */
+  /* Using a linear gradient blending from LIGHT BLUE to LIGHT RED/PINK */
   background-image: linear-gradient(
     90deg, 
     rgba(13, 220, 253, 0.8) 0%,   /* Light Blue/Cyan starting at the left */
@@ -42,9 +42,9 @@ body {
   /* Text remains dark for readability */
   color: #333; 
 }
-* Make the main title BOLDER */
+
 .jumbotron h1 {
-  font-weight: 700; /* Use a strong bold weight */
+  font-weight: 700; /* Using a strong bold weight */
 }
 
 /* Make all text in the jumbotron a bit bolder and highly readable */
@@ -66,13 +66,10 @@ footer {
   /* Text remains dark for readability */
   color: #333; 
 }
-/* ADD THIS NEW BLOCK to target the content area inside the card */
+
 .card-body {
   /* Set background to transparent or use the same semi-transparent color */
-  background-color: transparent !important; 
-  
-  /* If you want the inner section to be the same color as the outer .card, use this instead: */
-  /* background-color: rgba(0, 0, 50, 0.6); */
+  background-color: transparent !important;   
 }
 
 /* Make HealthTrack+ bold and gray in the navbar */
@@ -101,7 +98,7 @@ footer {
     margin: 40px auto; 
     border-radius: 10px;
     
-    /* *** RECTIFICATION: SOFTER GRADIENT (Blue -> Sky Blue -> Muted Red -> Dark Blue) *** */
+    
     background-image: linear-gradient(
         135deg, /* Diagonal angle */
         
@@ -123,13 +120,13 @@ footer {
 
 /* --- Image Container (.spotlight-image-box) --- */
 .spotlight-image-box {
-    /* **RECTIFICATION**: Giving the image container 50% of the flexible space */
+    
     flex: 0 0 50%; 
     display: flex;
     justify-content: flex-start; 
     padding-right: 40px; 
     
-    /* **RECTIFICATION**: Aggressively increased maximum width and height */
+    
     max-height: 500px; 
     max-width: 700px; /* Allowing for a very large image container */
 }
