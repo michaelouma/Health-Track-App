@@ -1,8 +1,8 @@
-🩺 HealthTrack+
+#🩺 HealthTrack+
 
 Early detection and easy booking — monitor non-communicable disease risks and consult doctors quickly.
 
-🌍 Overview
+#🌍 Overview
 
 HealthTrack+ is a web-based AI-powered health monitoring system designed to support early detection of non-communicable diseases (NCDs) such as heart disease and diabetes.
 The platform allows users to complete quick health assessments, view their personalized Health Risk Index, and connect with doctors for consultations — promoting preventive healthcare and aligning with SDG 3: Good Health and Well-being.
