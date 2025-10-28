@@ -43,3 +43,18 @@ Machine Learning	Scikit-learn / TensorFlow
 Database	SQLite
 Deployment	Render / Localhost
 Version Control	Git & GitHub
+# **🌱 Impact**
+
+Promotes early diagnosis and preventive healthcare.
+
+Improves access to doctors through digital booking.
+
+Contributes to UN SDG 3: Good Health and Well-being.
+
+Potential to scale across hospitals and community clinics in Kenya and beyond.
+
+# **🧾 Pitch Deck & Demo**
+
+📄 Pitch Deck: View Pitch Deck on Google Drive
+
+💻 Live Demo: Visit HealthTrack+ App
