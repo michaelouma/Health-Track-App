@@ -36,13 +36,22 @@ HealthTrack+ provides:
 ✅ Early detection insights for timely intervention
 
 # **🧠 Tech Stack**
-Component	Technology
-Frontend	HTML, CSS, Bootstrap
-Backend	Flask (Python)
-Machine Learning	Scikit-learn / TensorFlow
-Database	SQLite
-Deployment	Render / Localhost
-Version Control	Git & GitHub
+Component	Technology <br>
+Frontend	HTML, CSS, Bootstrap <br>
+Backend	Flask (Python) <br>
+Machine Learning	Scikit-learn / TensorFlow <br>
+Database	SQLite <br>
+Deployment	Render / Localhost <br>
+Version Control	Git & GitHub <br>
+# **📊 Machine Learning Model**
+
+The model predicts disease risk using patient input data such as:
+
+Age, Gender, Blood Pressure, Cholesterol, Heart Rate, etc.
+
+Algorithm used: Logistic Regression / Random Forest
+
+Model trained on open datasets from Kaggle (Cardiovascular/Heart Disease datasets).
 # **🌱 Impact**
 
 Promotes early diagnosis and preventive healthcare.
