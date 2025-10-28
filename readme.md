@@ -29,11 +29,11 @@ HealthTrack+ provides:
 
 # **⚙️ Features**
 
-✅ Predict risk for heart disease and other NCDs using ML
-✅ Patient and doctor registration/login system
-✅ Health Risk Index generation
-✅ Dashboard for health monitoring and consultations
-✅ Early detection insights for timely intervention
+✅ Predict risk for heart disease and other NCDs using ML <br>
+✅ Patient and doctor registration/login system <br>
+✅ Health Risk Index generation <br>
+✅ Dashboard for health monitoring and consultations <br>
+✅ Early detection insights for timely intervention <br>
 
 # **🧠 Tech Stack**
 Component	Technology <br>
